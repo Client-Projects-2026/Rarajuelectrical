@@ -78,7 +78,7 @@ export default function ContactSection() {
               </div>
               <iframe
                 title={`Map showing Raraju Electrical at ${contact.location}`}
-                src={`https://www.google.com/maps?q=${encodeURIComponent(contact.location)}&output=embed`}
+                src={`https://maps.google.com/maps?hl=en&z=16&iwloc=B&output=embed&q=${encodeURIComponent(contact.location)}`}
                 loading="lazy"
                 referrerPolicy="no-referrer"
                 allowFullScreen
