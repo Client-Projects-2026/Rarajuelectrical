@@ -1,36 +1,24 @@
-import { Factory, MapPin, ShieldCheck } from "../icons";
+import { Cable, Lightbulb, Settings } from "../icons";
+import { usePublicContent } from "../content/PublicContentProvider";
 
-const proofPoints = [
-  {
-    icon: Factory,
-    title: "100+ completed projects",
-    detail: "Industrial and commercial facilities",
-  },
-  {
-    icon: MapPin,
-    title: "Serving since 2010",
-    detail: "Venturu, East Godavari, Andhra Pradesh",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Certified electricians",
-    detail: "Available for emergency support",
-  },
-];
+const proofIcons = [Settings, Cable, Lightbulb];
 
 export default function ProofStrip() {
+  const { settings } = usePublicContent();
+
   return (
-    <section className="proof-strip" aria-label="Our experience">
+    <section className="proof-strip" aria-label="Services at a glance">
       <div className="container proof-grid">
-        {proofPoints.map(({ icon: Icon, title, detail }) => (
-          <div className="proof-item" key={title}>
+        {settings.services.slice(0, 3).map((service, index) => {
+          const Icon = proofIcons[index] ?? Settings;
+          return <div className="proof-item" key={service.number}>
             <Icon size={31} />
             <span>
-              <strong>{title}</strong>
-              <small>{detail}</small>
+              <strong>{service.title}</strong>
+              <small>Electrical service</small>
             </span>
-          </div>
-        ))}
+          </div>;
+        })}
       </div>
     </section>
   );

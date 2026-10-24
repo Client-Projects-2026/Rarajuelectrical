@@ -8,7 +8,7 @@ import {
   ShieldCheck,
   Zap,
 } from "../icons";
-import { services } from "../data";
+import { usePublicContent } from "../content/PublicContentProvider";
 
 const serviceIcons: Record<
   string,
@@ -23,6 +23,8 @@ const serviceIcons: Record<
 };
 
 export default function ServicesSection() {
+  const { settings } = usePublicContent();
+
   return (
     <section
       className="services-section section-pad"
@@ -44,7 +46,7 @@ export default function ServicesSection() {
           </p>
         </div>
         <div className="services-grid">
-          {services.map((service) => {
+          {settings.services.map((service) => {
             const ServiceIcon = serviceIcons[service.number] ?? Zap;
             return (
               <article className="service-card" key={service.number}>

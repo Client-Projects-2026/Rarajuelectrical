@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, Pause, Play } from "../icons";
 import { heroSlides } from "../data/heroSlides";
 import PowerFlowOverlay from "./PowerFlowOverlay";
+import { usePublicContent } from "../content/PublicContentProvider";
 
 export default function HeroSection() {
+  const { settings } = usePublicContent();
   const [activeSlide, setActiveSlide] = useState(0);
   const [autoPlay, setAutoPlay] = useState(true);
   const [isPausedByPointer, setIsPausedByPointer] = useState(false);
@@ -87,14 +89,22 @@ export default function HeroSection() {
           <span /> ENGINEERING | INSTALLATION | LONG-TERM SUPPORT
         </p>
         <h1 id="hero-title" className="hero-reveal hero-title">
-          {slide.title}
-          <br />
-          <em>
-            {slide.lead}
-            <span>{slide.accent}</span>
-          </em>
+          {activeSlide === 0 ? (
+            settings.hero_title
+          ) : (
+            <>
+              {slide.title}
+              <br />
+              <em>
+                {slide.lead}
+                <span>{slide.accent}</span>
+              </em>
+            </>
+          )}
         </h1>
-        <p className="hero-intro hero-reveal">{slide.description}</p>
+        <p className="hero-intro hero-reveal">
+          {activeSlide === 0 ? settings.hero_description : slide.description}
+        </p>
         <div className="hero-actions hero-reveal">
           <a className="button button-accent" href="#contact">
             {slide.primaryAction} <ArrowRight size={17} />

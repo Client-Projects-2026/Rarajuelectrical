@@ -1,19 +1,21 @@
-import { contact } from "../data";
 import { MessageCircle, PhoneCall } from "../icons";
+import { usePublicContent } from "../content/PublicContentProvider";
 
 export default function QuickContactActions() {
+  const { settings } = usePublicContent();
+
   return (
     <div className="quick-contact-actions" aria-label="Quick contact">
       <a
         className="quick-contact-call"
-        href={`tel:${contact.phoneLink}`}
-        aria-label={`Call Raraju Electrical at ${contact.phoneDisplay}`}
+        href={`tel:${settings.phone_link}`}
+        aria-label={`Call ${settings.business_name} at ${settings.phone_display}`}
       >
         <PhoneCall size={17} /> <span>Call</span>
       </a>
       <a
         className="quick-contact-whatsapp"
-        href={`https://wa.me/${contact.whatsapp}`}
+        href={`https://wa.me/${settings.whatsapp}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contact Raraju Electrical on WhatsApp (opens in a new tab)"

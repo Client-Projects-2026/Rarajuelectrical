@@ -1,12 +1,8 @@
-import { Check, ShieldCheck, Zap } from "../icons";
-
-const credentials = [
-  { icon: Check, label: "100+ completed projects" },
-  { icon: ShieldCheck, label: "Certified electricians" },
-  { icon: Zap, label: "24/7 emergency services" },
-];
+import { usePublicContent } from "../content/PublicContentProvider";
 
 export default function AboutSection() {
+  const { settings } = usePublicContent();
+
   return (
     <section
       className="about-section"
@@ -18,26 +14,10 @@ export default function AboutSection() {
           <p className="eyebrow">
             <span /> ABOUT RARAJU ELECTRICAL
           </p>
-          <h2 id="about-title">
-            Engineering that keeps your operation moving.
-          </h2>
+          <h2 id="about-title">{settings.about_title}</h2>
         </div>
         <div className="about-copy">
-          <p>
-            Established in 2010, Raraju Electrical Engineering Power Solution
-            Works serves Andhra Pradesh with electrical work for industrial,
-            commercial and residential customers. Our team handles control
-            panels, cable laying, VFD systems, lighting and lightning
-            protection, with support from installation through ongoing
-            maintenance.
-          </p>
-          <div className="about-values">
-            {credentials.map(({ icon: Icon, label }) => (
-              <span key={label}>
-                <Icon size={16} /> {label}
-              </span>
-            ))}
-          </div>
+          <p>{settings.about_description}</p>
         </div>
       </div>
     </section>

@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Pause, Play } from "../icons";
-import { projects } from "./data";
+import type { Project } from "../content/types";
 import "./projects.css";
 
-const loopedProjects = [...projects, ...projects];
-
-export default function ProjectCarousel() {
+export default function ProjectCarousel({ projects }: { projects: Project[] }) {
   const viewportRef = useRef<HTMLDivElement>(null);
   const firstCardRef = useRef<HTMLElement>(null);
   const pointerStartX = useRef<number | null>(null);
@@ -16,6 +14,16 @@ export default function ProjectCarousel() {
   const [paused, setPaused] = useState(false);
   const [autoPlay, setAutoPlay] = useState(true);
   const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    setIndex(0);
+  }, [projects.length]);
+
+  const loopedProjects = [...projects, ...projects];
+
+  if (projects.length === 0) {
+    return <p className="container project-carousel-empty">Project details are being updated. Please check back soon.</p>;
+  }
 
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -50,10 +58,10 @@ export default function ProjectCarousel() {
   }, []);
 
   useEffect(() => {
-    if (paused || !autoPlay || reducedMotion) return;
+    if (paused || !autoPlay || reducedMotion || projects.length < 2) return;
     const timer = window.setInterval(() => setIndex((value) => value + 1), 5000);
     return () => window.clearInterval(timer);
-  }, [autoPlay, paused, reducedMotion]);
+  }, [autoPlay, paused, projects.length, reducedMotion]);
 
   useEffect(() => {
     if (transitionEnabled) return;
@@ -62,6 +70,7 @@ export default function ProjectCarousel() {
   }, [transitionEnabled]);
 
   const goTo = (nextIndex: number) => {
+    if (projects.length < 2) return;
     setTransitionEnabled(true);
     setIndex((nextIndex + projects.length) % projects.length);
   };

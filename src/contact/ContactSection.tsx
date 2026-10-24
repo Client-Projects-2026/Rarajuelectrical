@@ -1,6 +1,6 @@
 import { ArrowUpRight, MessageCircle, PhoneCall } from "../icons";
-import { contact } from "../data";
 import QuoteRequestForm from "./QuoteRequestForm";
+import { usePublicContent } from "../content/PublicContentProvider";
 
 const contactSpecialties = [
   "Control panels",
@@ -10,6 +10,8 @@ const contactSpecialties = [
 ];
 
 export default function ContactSection() {
+  const { settings } = usePublicContent();
+
   return (
     <section
       className="contact-section section-pad"
@@ -37,12 +39,12 @@ export default function ContactSection() {
             ))}
           </ul>
           <div className="contact-quick-links">
-            <a className="button button-accent" href={`tel:${contact.phoneLink}`}>
-              <PhoneCall size={16} /> Call {contact.phoneDisplay}
+            <a className="button button-accent" href={`tel:${settings.phone_link}`}>
+              <PhoneCall size={16} /> Call {settings.phone_display}
             </a>
             <a
               className="button button-whatsapp"
-              href={`https://wa.me/${contact.whatsapp}`}
+              href={`https://wa.me/${settings.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -50,26 +52,26 @@ export default function ContactSection() {
             </a>
           </div>
           <div className="contact-methods">
-            {contact.location && (
+            {settings.location && (
               <div>
                 <span>Business address</span>
-                <strong>{contact.location}</strong>
+                <strong>{settings.location}</strong>
               </div>
             )}
-            {contact.email && (
-              <a href={`mailto:${contact.email}`}>
+            {settings.email && (
+              <a href={`mailto:${settings.email}`}>
                 <span>Email</span>
-                <strong>{contact.email}</strong>
+                <strong>{settings.email}</strong>
                 <ArrowUpRight size={17} />
               </a>
             )}
           </div>
-          {contact.location && (
+          {settings.location && (
             <div className="contact-map">
               <div className="contact-map-heading">
                 <h3>Find our workshop</h3>
                 <a
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.location)}`}
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(settings.location)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -77,8 +79,8 @@ export default function ContactSection() {
                 </a>
               </div>
               <iframe
-                title={`Map showing Raraju Electrical at ${contact.location}`}
-                src={`https://maps.google.com/maps?hl=en&z=16&iwloc=B&output=embed&q=${encodeURIComponent(contact.location)}`}
+                title={`Map showing ${settings.business_name} at ${settings.location}`}
+                src={`https://maps.google.com/maps?hl=en&z=16&iwloc=B&output=embed&q=${encodeURIComponent(settings.location)}`}
                 loading="lazy"
                 referrerPolicy="no-referrer"
                 allowFullScreen

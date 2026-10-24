@@ -3,20 +3,15 @@ import { services } from "../data";
 import { useQuoteRequest } from "./useQuoteRequest";
 
 export default function QuoteRequestForm() {
-  const { state, submit } = useQuoteRequest();
+  const { state, submit, errorMessage } = useQuoteRequest();
 
   return (
     <form
       id="quote-request"
       className="contact-form"
-      name="quote-request"
-      method="POST"
-      data-netlify="true"
-      netlify-honeypot="bot-field"
       aria-busy={state === "submitting"}
       onSubmit={submit}
     >
-      <input type="hidden" name="form-name" value="quote-request" />
       <p className="honeypot" aria-hidden="true">
         <label>
           Leave this field empty: {" "}
@@ -135,8 +130,7 @@ export default function QuoteRequestForm() {
       )}
       {state === "error" && (
         <p className="form-status error" role="alert">
-          Please complete the required fields and check your connection before
-          submitting.
+          {errorMessage}
         </p>
       )}
       <button

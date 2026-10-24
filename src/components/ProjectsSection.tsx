@@ -1,6 +1,13 @@
 import ProjectCarousel from "../projects/ProjectCarousel";
+import type { Project, SiteSettings } from "../content/types";
 
-export default function ProjectsSection() {
+export default function ProjectsSection({
+  settings,
+  projects,
+}: {
+  settings: SiteSettings;
+  projects: Project[];
+}) {
   return (
     <section
       className="projects-section"
@@ -11,13 +18,10 @@ export default function ProjectsSection() {
         <p className="eyebrow light">
           <span /> PROJECT CAPABILITIES
         </p>
-        <h2 id="projects-title">Electrical work built around uptime</h2>
-        <p>
-          Typical scopes of work across control panels, cable systems, lighting
-          and drives. Contact us to discuss your site requirements.
-        </p>
+        <h2 id="projects-title">{settings.projects_title}</h2>
+        <p>{settings.projects_description}</p>
       </div>
-      <ProjectCarousel />
+      <ProjectCarousel projects={projects} />
     </section>
   );
 }

@@ -1,9 +1,11 @@
 import { ArrowUpRight } from "../icons";
-import { socialLinks } from "../data";
 import Brand from "./Brand";
 import SocialProfileIcon from "./SocialProfileIcon";
+import { usePublicContent } from "../content/PublicContentProvider";
 
 export default function SiteFooter() {
+  const { settings } = usePublicContent();
+
   return (
     <footer className="site-footer">
       <div className="container footer-main">
@@ -19,7 +21,7 @@ export default function SiteFooter() {
             role="group"
             aria-label="Social media profiles"
           >
-            {socialLinks.map((profile) => (
+            {settings.socials.map((profile) => (
               <a
                 key={profile.name}
                 href={profile.href}
@@ -45,8 +47,7 @@ export default function SiteFooter() {
       </div>
       <div className="container footer-bottom">
         <span>
-          © {new Date().getFullYear()} Raraju Electrical Engineering Power
-          Solution Works. All rights reserved.
+          © {new Date().getFullYear()} {settings.business_name}. All rights reserved.
         </span>
         <span>Built around reliability.</span>
       </div>

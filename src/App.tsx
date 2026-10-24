@@ -7,8 +7,11 @@ import ServicesSection from "./components/ServicesSection";
 import SiteFooter from "./components/SiteFooter";
 import SiteHeader from "./components/SiteHeader";
 import ContactSection from "./contact/ContactSection";
+import { usePublicContent } from "./content/PublicContentProvider";
 
 function App() {
+  const { settings, projects } = usePublicContent();
+
   return (
     <>
       <a className="skip-link" href="#main">
@@ -19,7 +22,7 @@ function App() {
         <HeroSection />
         <ProofStrip />
         <ServicesSection />
-        <ProjectsSection />
+        <ProjectsSection settings={settings} projects={projects} />
         <AboutSection />
         <ContactSection />
       </main>
