@@ -16,12 +16,12 @@ Create a production build with `npm run build` and preview it with `npm run prev
 - Edit contact details and service categories in `src/data.ts`. Project copy and image assignments live in `src/projects/data.ts`; the carousel UI and its styles are in `src/projects/`.
 - Page sections are split into focused components in `src/components/`, while the enquiry section and Netlify form logic live in `src/contact/`.
 - Global styling is organized by page area in `src/styles/`. `src/theme.css` imports these files in cascade order.
-- The project carousel shows three cards on desktop, advances automatically, and pauses while hovered or focused. It respects reduced-motion preferences.
+- The project capability carousel loops automatically, supports swipe/drag and arrow/dot navigation, and has a persistent pause control. It pauses on hover or focus and respects reduced-motion preferences.
 - The hero has two slides, timed rotation, previous/next and dot controls, plus a pause button. It pauses while hovered or keyboard-focused and respects reduced-motion settings.
 - Service and project cards use separate generated photographs in `public/`. They are illustrative visuals; use verified onsite photos when you want to document the exact completed jobs.
 - The second hero slide uses `design-reference/Factory Electrical Backbone, Illuminated.png`; its existing blue routes are traced by the animated SVG overlay. The original logo (`RaRaja.png`) remains in `public/`.
-- Confirm the final business name and contact details before publishing. Empty phone and WhatsApp settings send visitors to the enquiry form instead of opening invalid contact links.
+- Confirm the business phone, WhatsApp, email, address, and social profiles directly with the client before publishing. Current project cards describe typical scopes and are not verified customer case studies.
 
 ## Netlify form
 
-The quote request form is declared in `index.html` for Netlify's build-time form detection and submits to Netlify Forms. After deploying, enable form notifications and select the email address that should receive enquiries in the Netlify site settings.
+The contact section includes a lazy-loaded Google Maps embed and directions link based on the supplied business address; verify the mapped pin before launch. The quote request form is declared in `index.html` for Netlify's build-time form detection and submits to Netlify Forms. After deploying, enable form notifications and select the email address that should receive enquiries in the Netlify site settings. Configure and verify production form delivery before launch.
